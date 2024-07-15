@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.ForecastList"
+             xmlns:local="clr-namespace:MauiApp1"
+             Title="ForecastList">
+    <ContentPage.Resources>
+        <local:CelsiusRound x:Key="celsiusRound" />
+        <local:IconConverter x:Key="iconConverter" />
+        <local:LongToDateTimeConverter x:Key="longToDatetimeConverter" />
+    </ContentPage.Resources>
+
+
+    <ListView
+        x:Name="forecastList"
+        SeparatorColor="Gray"
+        ItemSelected="OnItemSelected">
+        <ListView.Header>
+            <StackLayout BackgroundColor="Transparent">
+                <Label
+                   Text="Forecast"
+                   TextColor="White"
+                   FontSize="25"
+                   FontAttributes="Bold" />
+            </StackLayout>
+        </ListView.Header>
+        <ListView.Background>
+            <LinearGradientBrush EndPoint="0,1">
+                <GradientStop Color="#000428"
+                          Offset="0.1" />
+                <GradientStop Color="#004e92"
+                          Offset="1.0" />
+
+            </LinearGradientBrush>
+        </ListView.Background>
+        <ListView.ItemTemplate>
+        <DataTemplate>
+                <ImageCell ImageSource="{Binding Weather[0].Icon, Converter={StaticResource iconConverter}}"
+                       Text="{Binding Dt, Converter={StaticResource longToDatetimeConverter}}"
+                           TextColor="White"
+                       Detail="{Binding Weather[0].Description}"
+                           DetailColor="White"/>
+            </DataTemplate>
+    </ListView.ItemTemplate>
+    </ListView>
+    
+</ContentPage>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiApp1"
+             x:Class="MauiApp1.SearchByCityName"
+             Title="SearchByCityName">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="labelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Small" />
+                <Setter Property="TextColor" Value="Gray" />
+            </Style>
+            <Style x:Key="labelResultStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="Margin" Value="10,0,0,0" />
+            </Style>
+
+            <local:LongToDateTimeConverter x:Key="longToDatetimeConverter" />
+            <local:CelsiusRound x:Key="celsiusRound" />
+            <local:IconConverter x:Key="iconConverter" />
+            <local:DegreeToDirectionConverter x:Key="degreeConverter" />
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <ScrollView.Background>
+            <LinearGradientBrush EndPoint="0,1">
+                <GradientStop Color="#000428"
+                          Offset="0.1" />
+                <GradientStop Color="#00924e"
+                          Offset="1.0" />
+
+            </LinearGradientBrush>
+        </ScrollView.Background>
+
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="0,0"
+            VerticalOptions="Center">
+
+            <StackLayout Margin="20,10"
+            HorizontalOptions="Start"
+            Orientation="Vertical"
+            Spacing="20"
+            VerticalOptions="Start">
+                <StackLayout Orientation="Horizontal">
+                    <Label
+                    FontSize="16"
+                    Text="{Binding Title}"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                    <Label
+                    FontSize="16"
+                    Text="{Binding Sys.Country, StringFormat=' , {0}'}"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout
+            Margin="0,10"
+            HorizontalOptions="Center"
+            Orientation="Vertical"
+            VerticalOptions="Center">
+                <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+                    <Image
+                    HeightRequest="50"
+                    Source="{Binding Weather[0].Icon, Converter={StaticResource iconConverter}}"
+                    VerticalOptions="Center"
+                    WidthRequest="50" />
+                    <Label
+                    FontAttributes="Bold"
+                    FontSize="70"
+                    Text="{Binding Main.Temperature, Converter={StaticResource celsiusRound}}"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                    <Label
+                    FontSize="34"
+                    Text="°C"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                </StackLayout>
+                <StackLayout 
+                    HorizontalOptions="Center" 
+                    Orientation="Horizontal" 
+                    Margin="0,10">
+                    <Label
+                Margin="5,0"
+                Text="Feels like "
+                HorizontalOptions="Center"
+                TextColor="White"/>
+                    <Label
+                Text="{Binding Main.Feels_like, Converter={StaticResource celsiusRound}}"
+                HorizontalOptions="Center"
+                TextColor="White"/>
+                    <Label
+                    Text="°C"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                </StackLayout>
+                <Label
+                FontSize="16"
+                HorizontalOptions="Center"
+                Text="{Binding Weather[0].Description}"
+                TextColor="White" />
+            </StackLayout>
+
+            <Frame BackgroundColor="Transparent"
+                   BorderColor="Transparent">
+                <StackLayout
+            Orientation="Vertical"
+            Spacing="20">
+                    <!--Fix margin for image instead of the whole layout-->
+
+                    <StackLayout Orientation="Horizontal" Spacing="40">
+                        <Image 
+                        Source="temperature32.png"/>
+                        <Label
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    Text="Min/Max"
+                    TextColor="#afafaf"
+                    VerticalOptions="End" />
+                        <Label
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                            Margin="0,0,-20,0"
+                    Text="{Binding Main.TempMin, Converter={StaticResource celsiusRound}}"
+                    TextColor="#afafaf"
+                    VerticalOptions="End" />
+                        <Label
+                    FontAttributes="Bold"
+                    Margin="-20,0"
+                    FontSize="Small"
+                    Text="{Binding Main.TempMax, StringFormat=' / {0}', Converter={StaticResource celsiusRound}}"
+                    TextColor="#afafaf"
+                    VerticalOptions="End" />
+                        <Label
+                    FontAttributes="Bold"
+                    Margin="-20,0"
+                    FontSize="Small"
+                    Text=" °C"
+                    TextColor="#afafaf"
+                    VerticalOptions="End" />
+                    </StackLayout>
+                    <BoxView Color="Gray"
+             HeightRequest="2"
+             HorizontalOptions="Fill" />
+                    <StackLayout Orientation="Horizontal" Spacing="40">
+                        <Image 
+                        Source="wind32.png"/>
+                        <Label
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    Text="Wind"
+                    TextColor="#afafaf"
+                    VerticalOptions="End" />
+                        <Label
+                    FontAttributes="Bold"
+                    Margin="-20,0"
+                    FontSize="Small"
+                    Text="{Binding Wind.Speed}"
+                    TextColor="#afafaf"
+                    VerticalOptions="End" />
+                        <Label
+                    FontAttributes="Bold"
+                    Margin="-20,0"
+                    FontSize="Small"
+                    Text="m/s "
+                    TextColor="#afafaf"
+                    VerticalOptions="End" />
+                        <Label
+                    FontAttributes="Bold"
+                    Margin="-10,0"
+                    FontSize="Small"
+                    Text="{Binding Wind.Deg, Converter={StaticResource degreeConverter}}"
+                    TextColor="#afafaf"
+                    VerticalOptions="End" />
+                    </StackLayout>
+                    <BoxView Color="Gray"
+             HeightRequest="2"
+             HorizontalOptions="Fill" />
+
+                    <StackLayout Orientation="Horizontal" Spacing="40">
+                        <Image 
+                        Source="droplet32.png"/>
+                        <Label
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    Text="Humidity"
+                    TextColor="#afafaf"
+                    VerticalOptions="End" />
+                        <Label
+                    FontAttributes="Bold"
+                    Margin="-20,0"
+                    FontSize="Small"
+                    Text="{Binding Main.Humidity}"
+                    TextColor="#afafaf"
+                    VerticalOptions="End" />
+                        <Label
+                    FontAttributes="Bold"
+                    Margin="-20,0"
+                    FontSize="Small"
+                    Text="%"
+                    TextColor="#afafaf"
+                    VerticalOptions="End" />
+                    </StackLayout>
+                    <BoxView Color="Gray"
+             HeightRequest="2"
+             HorizontalOptions="Fill" />
+                    <StackLayout Orientation="Horizontal" Spacing="40">
+                        <Image 
+                        Source="pressure32.png"/>
+                        <Label
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    Text="Pressure"
+                    TextColor="#afafaf"
+                    VerticalOptions="End" />
+                        <Label
+                    FontAttributes="Bold"
+                    Margin="-20,0"
+                    FontSize="Small"
+                    Text="{Binding Main.Pressure}"
+                    TextColor="#afafaf"
+                    VerticalOptions="End" />
+                        <Label
+                    FontAttributes="Bold"
+                    Margin="-20,0"
+                    FontSize="Small"
+                    Text=" hPa"
+                    TextColor="#afafaf"
+                    VerticalOptions="End" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame> 
+            <StackLayout
+                Margin="10"
+                Spacing="10">
+                <Entry
+                x:Name="_cityEntry"
+                BackgroundColor="#000000"
+                HorizontalTextAlignment="Center"
+                    Margin="0,30,0,0"
+                FontSize="20"
+                    HeightRequest="40"
+                Placeholder="Enter City"
+                TextColor="White"
+                HorizontalOptions="Fill"/>
+                <Button
+                Text="Search for city"
+                HorizontalOptions="Fill"
+                Clicked="OnGetWeatherButtonClicked"
+                BackgroundColor="#000000"/>
+
+            </StackLayout>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

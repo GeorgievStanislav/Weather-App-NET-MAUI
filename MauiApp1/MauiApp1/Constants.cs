@@ -5,6 +5,6 @@
         public static string OpenWeatherMapEndpoint = "https://api.openweathermap.org/data/2.5/weather";
         public static string OpenWeatherMapForecast = "https://api.openweathermap.org/data/2.5/forecast";
         public static string OpenWeatherMapOneCall = "https://api.openweathermap.org/data/3.0/onecall";
-        public static string OpenWeatherMapAPIKey = "e4c6aab5e2d7a98286fcc42e304108a2";
+        public static string OpenWeatherMapAPIKey = "188ee409cf0e985813f619143389bdba";
     }
 }
